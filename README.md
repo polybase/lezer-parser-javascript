@@ -1,4 +1,6 @@
-# @lezer/javascript
+# @polylang/lezer-parser-javascript
+
+This has been adopted for use with [Polylang](https://github.com/polybase/polylang).
 
 This is a JavaScript grammar for the
 [lezer](https://lezer.codemirror.net/) parser system.
