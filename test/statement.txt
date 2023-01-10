@@ -181,6 +181,7 @@ class Foo extends require('another-class') {
   static { f() }
 }
 
+
 ==>
 
 Script(
@@ -194,6 +195,37 @@ Script(
     PropertyDeclaration(PropertyDefinition),
     PropertyDeclaration(PropertyDefinition,Equals,Number),
     StaticBlock(static, Block(ExpressionStatement(CallExpression(VariableName,ArgList)))))))
+
+# Collection
+
+collection Foo {
+  static one(a) { return a; };
+  two(b) { return b; }
+  finally() {}
+}
+
+collection Foo extends require('another-class') {
+  constructor() { super(); }
+  bar() { super.a(); }
+  prop;
+  etc = 20;
+  static { f() }
+}
+
+==>
+
+Script(
+  ClassDeclaration(collection,VariableDefinition,ClassBody(
+    MethodDeclaration(static,PropertyDefinition,ParamList(VariableDefinition),Block(ReturnStatement(return,VariableName))),
+    MethodDeclaration(PropertyDefinition,ParamList(VariableDefinition),Block(ReturnStatement(return,VariableName))),
+    MethodDeclaration(PropertyDefinition,ParamList,Block))),
+  ClassDeclaration(collection,VariableDefinition,extends,CallExpression(VariableName,ArgList(String)),ClassBody(
+    MethodDeclaration(PropertyDefinition,ParamList,Block(ExpressionStatement(CallExpression(super,ArgList)))),
+    MethodDeclaration(PropertyDefinition,ParamList,Block(ExpressionStatement(CallExpression(MemberExpression(super,PropertyName),ArgList)))),
+    PropertyDeclaration(PropertyDefinition),
+    PropertyDeclaration(PropertyDefinition,Equals,Number),
+    StaticBlock(static, Block(ExpressionStatement(CallExpression(VariableName,ArgList)))))))
+
 
 # Private properties
 

@@ -122,7 +122,7 @@ FunctionDeclaration {
 }
 
 ClassDeclaration {
-  !statement Decorator* tskw<"abstract">? kw<"class"> VariableDefinition TypeParamList?
+  !statement Decorator* tskw<"abstract">? (kw<"class"> | kw<"collection">) VariableDefinition TypeParamList?
   (kw<"extends"> ((VariableName | MemberExpression) !typeargs TypeArgList | expression))?
   (tskw<"implements"> commaSep1<type>)?
   ClassBody
